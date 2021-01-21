@@ -30,10 +30,8 @@ pipeline {
 }
 
 void deploy() {
-    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-        sh 'echo "[ $BRANCH_NAME ] Runing..."'
-        sh 'docker run filebeat-$BRANCH_NAME-build'
-        sh 'docker system prune -f'
-        sh 'sleep 10s'
-	}
+    sh 'echo "[ $BRANCH_NAME ] Runing..."'
+    sh 'docker run -d filebeat-$BRANCH_NAME-build'
+    sh 'docker system prune -f'
+    sh 'sleep 10s'
 }
