@@ -3,6 +3,7 @@ pipeline {
     stages {
     	stage('Build') {
     		steps {
+    		    sh 'docker system prune -f'
     			sh 'echo "[ $BRANCH_NAME ] Start building..."'
     			sh 'docker build -t filebeat-$BRANCH_NAME-build .'
     		}
